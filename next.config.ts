@@ -8,13 +8,24 @@ const isProd = process.env.NODE_ENV === 'production';
 // CSP — mode permissive buat development, perketat nanti di production
 const cspDirectives = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
-  // Tambah Google Fonts (buat Mulish / font external)
+  // Tambahin manifest-src buat Vercel preview & PWA
+  "manifest-src 'self' https://vercel.com https://*.vercel.app",
+  
+  // Script dari self, inline (Next.js), Google Analytics, dan Vercel Live
+  "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://vercel.live",
+  
+  // Style dari self, inline (Tailwind), dan Google Fonts
   "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-  "img-src 'self' data: blob: https:",
-  // Font file Google (fonts.gstatic.com) + data
+  
+  // Gambar dari self, data, blob, https apapun, dan Google Analytics pixel
+  "img-src 'self' data: blob: https: https://www.google-analytics.com https://www.googletagmanager.com",
+  
+  // Font dari self, data, Google Fonts
   "font-src 'self' data: https://fonts.gstatic.com https://fonts.googleapis.com",
-  "connect-src 'self' https://komiku.online ws: wss: https://fonts.googleapis.com https://fonts.gstatic.com",
+  
+  // Koneksi API ke Komiku, WebSocket (dev), Google Analytics, dan Vercel Live
+  "connect-src 'self' https://komiku.online ws: wss: https://fonts.googleapis.com https://fonts.gstatic.com https://www.google-analytics.com https://analytics.google.com https://*.google-analytics.com https://*.analytics.google.com https://vercel.live",
+  
   "frame-ancestors 'none'",
   "object-src 'none'",
   "base-uri 'self'",
