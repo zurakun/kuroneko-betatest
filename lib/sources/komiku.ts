@@ -51,8 +51,8 @@ async function fetchHtml(
   url: string,
   options: { retries?: number; timeoutMs?: number } = {}
 ): Promise<string> {
-  const retries = options.retries ?? 4;
-  const timeoutMs = options.timeoutMs ?? 25000;
+  const retries = options.retries ?? 2;
+  const timeoutMs = options.timeoutMs ?? 9000;
 
   let lastError: unknown = null;
 
