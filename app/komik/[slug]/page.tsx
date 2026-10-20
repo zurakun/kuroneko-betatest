@@ -111,15 +111,19 @@ async function DetailContent({ params }: PageProps) {
               <span className="info-value">
                 {detail.genres.length > 0 ? (
                   <span className="info-chips">
-                    {detail.genres.map((g: Genre) => (
-                      <Link
-                        key={g.slug}
-                        href={`/genre/${g.slug}`}
-                        className="genre-chip"
-                      >
-                        {g.name}
-                      </Link>
-                    ))}
+                    {detail.genres.map((g: Genre) => {
+                      // FIX: Bersihin prefix 'genre/' kalau ada
+                      const cleanSlug = g.slug.replace(/^genre\//, '');
+                      return (
+                        <Link
+                          key={cleanSlug}
+                          href={`/genre/${cleanSlug}`}
+                          className="genre-chip"
+                        >
+                          {g.name}
+                        </Link>
+                      );
+                    })}
                   </span>
                 ) : (
                   '-'
